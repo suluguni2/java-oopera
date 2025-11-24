@@ -4,6 +4,7 @@ import theater_team.Actor;
 import theater_team.Director;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Show {
     protected String title;
@@ -18,17 +19,53 @@ public class Show {
         listOfActors = new ArrayList<>();
     }
 
+    public String getDirector() {
+        return director.toString();
+    }
+
     public void addActor(Actor actor) {
         boolean containsActor = listOfActors.contains(actor);
         if (containsActor) {
             System.out.println("Этот актёр уже участвует в спектакле.");
         } else {
             listOfActors.add(actor);
-            System.out.println("Актёр добавлен в спектакль.");
+            System.out.println("Актёр " + actor.getSurname() + " добавлен в спектакль.");
         }
     }
 
+        /*public void swapActors(Actor actor, String surname) {
+            for (Actor anActor : listOfActors) {
+                if (anActor.getSurname().equals(surname)) {
+                    listOfActors.remove(anActor);
+                    listOfActors.add(actor);
+                    System.out.println("Актёр " + surname + " был заменён на актёра " + actor.getSurname() + ".");
+                    return;
+                }
+            }
+            System.out.println("Актёр с фамилией " + surname + " отсутствует");
+        }*/
+
     public void swapActors(Actor actor, String surname) {
+        int count = numberOfLastNameMatches(surname);
+        if (count > 1) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Ошибка: в списке несколько актёров с фамилией " + surname);
+            System.out.println("Желаете заменить всех актёров с фамилией " + surname + "?\n1-да, 0-нет");
+            int choice = Integer.parseInt(scanner.nextLine());
+            if (choice == 1) {
+                swapAllTheActors(actor, surname);
+            }
+            else if (choice == 0){
+                System.out.println("Ни один актёр не был заменён");
+            }
+            else {
+                System.out.println("Не корректный ввод. Ни один актёр не был заменён");
+            }
+            return;
+        } else if (count == 0) {
+            System.out.println("Актёр с фамилией " + surname + " отсутствует");
+            return;
+        }
         for (Actor anActor : listOfActors) {
             if (anActor.getSurname().equals(surname)) {
                 listOfActors.remove(anActor);
@@ -37,15 +74,46 @@ public class Show {
                 return;
             }
         }
-        System.out.println("Актёр с фамилией " + surname + " отсутствует");
     }
 
-    @Override
-    public String toString() {
+/*    private void swapAllTheActors (Actor actor, String surname) {
+        for (Actor anActor : listOfActors) {
+            if (anActor.getSurname().equals(surname)) {
+                listOfActors.remove(anActor);
+                //listOfActors.add(actor);
+                listOfActors.addFirst(actor);
+                System.out.println("Актёр " + surname + " был заменён на актёра " + actor.getSurname() + ".");
+            }
+        }
+    }*/
+    private void swapAllTheActors(Actor actor, String surname) {
+        for (int i = 0; i < listOfActors.size(); i++) {
+            Actor anActor = listOfActors.get(i);
+            if (anActor.getSurname().equals(surname)) {
+                listOfActors.remove(i);
+                i--;
+            }
+        }
+        listOfActors.addFirst(actor);
+        System.out.println("Актёры с фамилией " + surname + " были заменён на актёра " + actor.getSurname() + ".");
+    }
+
+
+    private int numberOfLastNameMatches(String surname){
+        int count = 0;
+        for (Actor anActor : listOfActors) {
+            if (anActor.getSurname().equals(surname)) {
+                count += 1;
+            }
+        }
+        return count;
+     }
+
+    public void printActors() {
         String listActors = "";
         for (Actor actor : listOfActors) {
-            listActors += actor.getSurname() + " " + actor.getName() + " " + "(" + actor.getHeight() + ")\n";
+            listActors += actor.toString();
         }
-        return listActors;
+        System.out.println(listActors);
     }
 }

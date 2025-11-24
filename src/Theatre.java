@@ -7,6 +7,8 @@ public class Theatre {
         Actor actor2 = new Actor("Иванка", "Серебрякова", Gender.FEMALE, 172);
         Actor actor3 = new Actor("Александр", "Ермолаев", Gender.MALE, 188);
 
+        Actor actor4 = new Actor("Ильнар", "Ермолаев", Gender.MALE, 168);
+
         Director director1 = new Director("Варвара", "Попова", Gender.FEMALE, 27);
         Director director2 = new Director("Сергей", "Гусев", Gender.MALE, 15);
 
@@ -26,18 +28,29 @@ public class Theatre {
         Ballet ballet = new Ballet("Кармен", 120, director2,
                 musicAuthor, "Кармен бросает кольцо, подаренное ей Доном Хозе, и хочет " +
                 "уйти — тот убивает её ", choreographer);
-        ballet.addActor(actor2);
         ballet.addActor(actor3);
+        ballet.addActor(actor3);
+        ballet.addActor(actor4);
 
-        System.out.println(show.toString());
-        System.out.println(opera.toString());
-        System.out.println(ballet.toString());
+        System.out.println("////////////////////////////////////////////////////");
+
+        System.out.println(show.getDirector());
+        System.out.println(opera.getDirector());
+        System.out.println(ballet.getDirector());
+
+        System.out.println("////////////////////////////////////////////////////");
+
+        show.printActors();
+        opera.printActors();
+        ballet.printActors();
+
+        System.out.println("////////////////////////////////////////////////////");
 
         ballet.swapActors(actor1, "Ермолаев");
-        System.out.println(ballet.toString());
+        ballet.printActors();
 
         opera.swapActors(actor3, "ДогадаеФ");
-        System.out.println(opera.toString());
+        opera.printActors();
 
         opera.printLibrettoText();
         ballet.printLibrettoText();
