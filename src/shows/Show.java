@@ -33,18 +33,6 @@ public class Show {
         }
     }
 
-        /*public void swapActors(Actor actor, String surname) {
-            for (Actor anActor : listOfActors) {
-                if (anActor.getSurname().equals(surname)) {
-                    listOfActors.remove(anActor);
-                    listOfActors.add(actor);
-                    System.out.println("Актёр " + surname + " был заменён на актёра " + actor.getSurname() + ".");
-                    return;
-                }
-            }
-            System.out.println("Актёр с фамилией " + surname + " отсутствует");
-        }*/
-
     public void swapActors(Actor actor, String surname) {
         int count = numberOfLastNameMatches(surname);
         if (count > 1) {
@@ -76,16 +64,6 @@ public class Show {
         }
     }
 
-/*    private void swapAllTheActors (Actor actor, String surname) {
-        for (Actor anActor : listOfActors) {
-            if (anActor.getSurname().equals(surname)) {
-                listOfActors.remove(anActor);
-                //listOfActors.add(actor);
-                listOfActors.addFirst(actor);
-                System.out.println("Актёр " + surname + " был заменён на актёра " + actor.getSurname() + ".");
-            }
-        }
-    }*/
     private void swapAllTheActors(Actor actor, String surname) {
         for (int i = 0; i < listOfActors.size(); i++) {
             Actor anActor = listOfActors.get(i);
