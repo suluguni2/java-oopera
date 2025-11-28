@@ -34,9 +34,9 @@ public class Theatre {
 
         System.out.println("////////////////////////////////////////////////////");
 
-        System.out.println(show.getDirector());
-        System.out.println(opera.getDirector());
-        System.out.println(ballet.getDirector());
+        show.printDirector();
+        opera.printDirector();
+        ballet.printDirector();
 
         System.out.println("////////////////////////////////////////////////////");
 

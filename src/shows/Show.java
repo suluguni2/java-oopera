@@ -4,6 +4,7 @@ import theater_team.Actor;
 import theater_team.Director;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Show {
@@ -19,8 +20,8 @@ public class Show {
         listOfActors = new ArrayList<>();
     }
 
-    public String getDirector() {
-        return director.toString();
+    public void printDirector() {
+        System.out.println(director.toString());
     }
 
     public void addActor(Actor actor) {
@@ -54,9 +55,11 @@ public class Show {
             System.out.println("Актёр с фамилией " + surname + " отсутствует");
             return;
         }
-        for (Actor anActor : listOfActors) {
+        Iterator <Actor> iterator = listOfActors.iterator();
+        while (iterator.hasNext()) {
+            Actor anActor = iterator.next();
             if (anActor.getSurname().equals(surname)) {
-                listOfActors.remove(anActor);
+                iterator.remove();
                 listOfActors.add(actor);
                 System.out.println("Актёр " + surname + " был заменён на актёра " + actor.getSurname() + ".");
                 return;
@@ -65,11 +68,11 @@ public class Show {
     }
 
     private void swapAllTheActors(Actor actor, String surname) {
-        for (int i = 0; i < listOfActors.size(); i++) {
-            Actor anActor = listOfActors.get(i);
+        Iterator <Actor> iterator = listOfActors.iterator();
+        while (iterator.hasNext()) {
+            Actor anActor = iterator.next();
             if (anActor.getSurname().equals(surname)) {
-                listOfActors.remove(i);
-                i--;
+                iterator.remove();
             }
         }
         listOfActors.addFirst(actor);
